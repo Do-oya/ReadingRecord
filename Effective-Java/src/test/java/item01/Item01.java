@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class item01 {
+public class Item01 {
 
     @Test
     @DisplayName("장점1 : 이름을 가질수 있다")
