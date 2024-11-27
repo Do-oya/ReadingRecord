@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("private 생성자나 열거 타입으로 싱글턴임을 보증하라")
+@DisplayName("아이템 3. private 생성자나 열거 타입으로 싱글턴임을 보증하라")
 public class Item03 {
 
     @Test
