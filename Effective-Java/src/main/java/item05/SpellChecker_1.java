@@ -2,15 +2,14 @@ package item05;
 
 import java.util.List;
 
-public class SpellChecker {
-
+public class SpellChecker_1 {
     private static final Lexicon dictionary = new KoreanDicationry();
 
-    private SpellChecker() {
+    private SpellChecker_1() {
     }
 
     public static boolean isValid(String word) {
-        throw new UnsupportedOperationException();
+        return true;
     }
 
     public static List<String> suggest(String typo) {
