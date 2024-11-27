@@ -7,6 +7,7 @@ import static item02.NyPizza.Size.SMALL;
 import static item02.Pizza.Topping.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@DisplayName("생성자에 매개변수가 많다면 빌더를 고려하라")
 public class item02 {
 
     @Test
