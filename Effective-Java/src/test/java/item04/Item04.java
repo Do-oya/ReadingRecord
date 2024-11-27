@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import static org.assertj.core.api.Assertions.*;
 
-@DisplayName("인스턴스화를 막으려거든 private 생성자를 사용하라")
+@DisplayName("아이템 4. 인스턴스화를 막으려거든 private 생성자를 사용하라")
 public class Item04 {
 
     @Test
