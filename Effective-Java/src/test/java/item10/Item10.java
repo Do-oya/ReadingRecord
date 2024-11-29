@@ -47,7 +47,7 @@ public class Item10 {
         Point_1 point = new Point_1(10, 10);
         ColorPoint_2 cp_1 = new ColorPoint_2(10, 10, Color.RED);
         ColorPoint_2 cp_2 = new ColorPoint_2(10, 10, Color.BLUE);
-        
+
         assertEquals(point, cp_1);
         assertEquals(cp_1, point);
         assertNotEquals(cp_1, cp_2);
