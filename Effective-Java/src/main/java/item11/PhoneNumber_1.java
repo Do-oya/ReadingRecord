@@ -1,10 +1,9 @@
 package item11;
-import java.util.*;
 
-public final class PhoneNumber {
+public final class PhoneNumber_1 {
     private final short areaCode, prefix, lineNum;
 
-    public PhoneNumber(int areaCode, int prefix, int lineNum) {
+    public PhoneNumber_1(int areaCode, int prefix, int lineNum) {
         this.areaCode = rangeCheck(areaCode, 999, "area code");
         this.prefix   = rangeCheck(prefix,   999, "prefix");
         this.lineNum  = rangeCheck(lineNum, 9999, "line num");
@@ -20,9 +19,9 @@ public final class PhoneNumber {
     public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof PhoneNumber))
+        if (!(o instanceof PhoneNumber_1))
             return false;
-        PhoneNumber pn = (PhoneNumber)o;
+        PhoneNumber_1 pn = (PhoneNumber_1)o;
         return pn.lineNum == lineNum && pn.prefix == prefix
                 && pn.areaCode == areaCode;
     }
