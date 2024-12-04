@@ -1,9 +1,12 @@
 package chapter4.item17;
 
-// 코드 17-1 불변 복소수 클래스 (106-107쪽)
 public final class Complex {
     private final double re;
     private final double im;
+
+    public static final Complex ZERO = new Complex(0, 0);
+    public static final Complex ONE = new Complex(1, 0);
+    public static final Complex I = new Complex(0, 1);
 
     public Complex(double re, double im) {
         this.re = re;
@@ -12,6 +15,10 @@ public final class Complex {
 
     public double realPart()      { return re; }
     public double imaginaryPart() { return im; }
+
+    public static Complex valueOf(double re, double im) {
+        return new Complex(re, im);
+    }
 
     public Complex plus(Complex c) {
         return new Complex(re + c.re, im + c.im);
