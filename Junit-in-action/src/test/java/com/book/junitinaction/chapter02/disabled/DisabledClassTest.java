@@ -22,4 +22,5 @@ public class DisabledClassTest {
         boolean canReceiveAdditionalWork = systemUnderTest.canReceiveAdditionalWork();
         assertFalse(canReceiveAdditionalWork);
     }
+    
 }
