@@ -4,10 +4,16 @@ import com.study.tobyspring.user.domain.User;
 
 import java.sql.*;
 
-public abstract class UserDao {
+public class UserDao {
+
+    private SimpleConnectionMarker simpleConnectionMaker;
+
+    public UserDao() {
+        simpleConnectionMaker = new SimpleConnectionMarker();
+    }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
-        Connection c = getConnection();
+        Connection c = simpleConnectionMaker.makeNewConnection();
 
         PreparedStatement ps = c.prepareStatement(
                 "insert into users(id, name, password) values(?,?,?)");
@@ -22,7 +28,7 @@ public abstract class UserDao {
     }
 
     public User get(String id) throws ClassNotFoundException, SQLException {
-        Connection c = getConnection();
+        Connection c = simpleConnectionMaker.makeNewConnection();
 
         PreparedStatement ps = c.prepareStatement(
                 "select * from users where id = ?");
@@ -43,7 +49,7 @@ public abstract class UserDao {
     }
 
     public void resetTable() throws ClassNotFoundException, SQLException {
-        Connection c = getConnection();
+        Connection c = simpleConnectionMaker.makeNewConnection();
         Statement stmt = c.createStatement();
 
         stmt.execute("SET FOREIGN_KEY_CHECKS = 0");
@@ -53,11 +59,4 @@ public abstract class UserDao {
         stmt.close();
         c.close();
     }
-
-    public abstract Connection getConnection() throws ClassNotFoundException, SQLException;
-    /*private static Connection getConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        return DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/springbook", "root", "1441");
-    }*/
 }
