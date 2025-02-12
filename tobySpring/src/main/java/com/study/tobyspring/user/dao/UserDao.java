@@ -42,6 +42,18 @@ public class UserDao {
         return user;
     }
 
+    public void resetTable() throws ClassNotFoundException, SQLException {
+        Connection c = getConnection();
+        Statement stmt = c.createStatement();
+
+        stmt.execute("SET FOREIGN_KEY_CHECKS = 0");
+        stmt.execute("TRUNCATE TABLE users");
+        stmt.execute("SET FOREIGN_KEY_CHECKS = 1");
+
+        stmt.close();
+        c.close();
+    }
+
     private static Connection getConnection() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         return DriverManager.getConnection(
