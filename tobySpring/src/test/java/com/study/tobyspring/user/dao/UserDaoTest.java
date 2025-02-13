@@ -10,9 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserDaoTest {
 
-    private final ConnectionMaker connectionMaker = new DConnectionMaker();
-
-    private final UserDao dao = new UserDao(connectionMaker);
+    private final UserDao dao = new DaoFactory().userDao();
 
     @BeforeEach
     void setUp() throws SQLException, ClassNotFoundException {
