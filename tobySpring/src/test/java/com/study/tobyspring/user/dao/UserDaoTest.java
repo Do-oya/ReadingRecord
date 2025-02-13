@@ -29,12 +29,21 @@ public class UserDaoTest {
 
 
         dao.add(user1);
-        assertThat(dao.getCount()).isEqualTo(1);
-
         dao.add(user2);
-        assertThat(dao.getCount()).isEqualTo(2);
-
         dao.add(user3);
         assertThat(dao.getCount()).isEqualTo(3);
+
+        User userGet1 = dao.get(user1.getId());
+        User userGet2 = dao.get(user2.getId());
+        User userGet3 = dao.get(user3.getId());
+
+        assertThat(userGet1.getName()).isEqualTo(user1.getName());
+        assertThat(userGet1.getPassword()).isEqualTo(user1.getPassword());
+
+        assertThat(userGet2.getName()).isEqualTo(user2.getName());
+        assertThat(userGet2.getPassword()).isEqualTo(user2.getPassword());
+
+        assertThat(userGet3.getName()).isEqualTo(user3.getName());
+        assertThat(userGet3.getPassword()).isEqualTo(user3.getPassword());
     }
 }
