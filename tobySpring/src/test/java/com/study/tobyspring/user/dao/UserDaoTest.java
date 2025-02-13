@@ -16,12 +16,12 @@ public class UserDaoTest {
     UserDao dao = context.getBean("userDao", UserDao.class);
 
     @BeforeEach
-    void setUp() throws SQLException, ClassNotFoundException {
+    void setUp() throws SQLException {
         dao.resetTable();
     }
 
     @Test
-    void test() throws SQLException, ClassNotFoundException {
+    void test() throws SQLException {
         User user = new User();
         user.setId("whiteship");
         user.setName("백기선");
