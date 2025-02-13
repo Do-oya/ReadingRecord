@@ -5,6 +5,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Import;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @Import(DaoFactory.class)
 class DaoFactoryTest {
 
@@ -24,5 +26,7 @@ class DaoFactoryTest {
 
         System.out.println(dao3);
         System.out.println(dao4);
+
+        assertThat(dao3).isEqualTo(dao4);
     }
 }
