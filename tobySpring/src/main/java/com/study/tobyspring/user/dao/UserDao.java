@@ -1,19 +1,17 @@
 package com.study.tobyspring.user.dao;
 
 import com.study.tobyspring.user.domain.User;
+import lombok.Setter;
 
 import java.sql.*;
 
+@Setter
 public class UserDao {
 
-    private ConnectionMaker connectionMaker;
+    private DataSource dataSource;
 
-    public void setConnectionMaker(ConnectionMaker connectionMaker) {
-        this.connectionMaker = connectionMaker;
-    }
-
-    public void add(User user) throws ClassNotFoundException, SQLException {
-        Connection c = connectionMaker.makeConnection();
+    public void add(User user) throws SQLException {
+        Connection c = dataSource.getConnection();
 
         PreparedStatement ps = c.prepareStatement(
                 "insert into users(id, name, password) values(?,?,?)");
@@ -27,8 +25,8 @@ public class UserDao {
         c.close();
     }
 
-    public User get(String id) throws ClassNotFoundException, SQLException {
-        Connection c = connectionMaker.makeConnection();
+    public User get(String id) throws SQLException {
+        Connection c = dataSource.getConnection();
 
         PreparedStatement ps = c.prepareStatement(
                 "select * from users where id = ?");
@@ -48,8 +46,8 @@ public class UserDao {
         return user;
     }
 
-    public void resetTable() throws ClassNotFoundException, SQLException {
-        Connection c = connectionMaker.makeConnection();
+    public void resetTable() throws SQLException {
+        Connection c = dataSource.getConnection();
         Statement stmt = c.createStatement();
 
         stmt.execute("SET FOREIGN_KEY_CHECKS = 0");
