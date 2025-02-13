@@ -23,17 +23,18 @@ public class UserDaoTest {
 
     @Test
     void addAndGet() throws SQLException {
-        User user = new User();
-        user.setId("whiteship");
-        user.setName("백기선");
-        user.setPassword("married");
+        User user1 = new User("baby1", "아사", "monster1");
+        User user2 = new User("baby2", "아현", "monster2");
+        User user3 = new User("baby3", "로라", "monster3");
 
-        dao.add(user);
+
+        dao.add(user1);
         assertThat(dao.getCount()).isEqualTo(1);
 
-        User user1 = dao.get(user.getId());
-        assertThat(user1.getId()).isEqualTo(user.getId());
-        assertThat(user1.getName()).isEqualTo(user.getName());
-        assertThat(user1.getPassword()).isEqualTo(user.getPassword());
+        dao.add(user2);
+        assertThat(dao.getCount()).isEqualTo(2);
+
+        dao.add(user3);
+        assertThat(dao.getCount()).isEqualTo(3);
     }
 }
