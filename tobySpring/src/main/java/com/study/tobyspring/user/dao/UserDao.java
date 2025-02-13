@@ -1,14 +1,17 @@
 package com.study.tobyspring.user.dao;
 
 import com.study.tobyspring.user.domain.User;
-import lombok.Setter;
 
+import javax.sql.DataSource;
 import java.sql.*;
 
-@Setter
 public class UserDao {
 
     private DataSource dataSource;
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     public void add(User user) throws SQLException {
         Connection c = dataSource.getConnection();
