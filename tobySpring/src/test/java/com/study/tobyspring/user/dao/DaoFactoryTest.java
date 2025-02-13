@@ -16,5 +16,13 @@ class DaoFactoryTest {
 
         System.out.println(dao1);
         System.out.println(dao2);
+
+        ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactoryTest.class);
+
+        UserDao dao3 = context.getBean(UserDao.class);
+        UserDao dao4 = context.getBean(UserDao.class);
+
+        System.out.println(dao3);
+        System.out.println(dao4);
     }
 }
