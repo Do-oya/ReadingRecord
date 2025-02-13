@@ -21,14 +21,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class UserDaoTest {
 
     @Autowired
-    private ApplicationContext context;
+    UserDao dao;
 
-    private UserDao dao;
     private User user;
 
     @BeforeEach
     void setUp() throws SQLException {
-        this.dao = context.getBean("userDao", UserDao.class);
         this.user = new User("baby", "아사", "monster");
         dao.deleteAll();
         assertThat(dao.getCount()).isEqualTo(0);
