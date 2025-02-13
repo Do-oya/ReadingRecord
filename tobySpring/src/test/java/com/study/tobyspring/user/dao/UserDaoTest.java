@@ -15,26 +15,25 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class UserDaoTest {
 
     private UserDao dao;
+    private User user;
 
     @BeforeEach
     void setUp() throws SQLException {
         ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
         this.dao = context.getBean("userDao", UserDao.class);
-
+        this.user = new User("baby", "아사", "monster");
         dao.deleteAll();
         assertThat(dao.getCount()).isEqualTo(0);
     }
 
     @Test
     void addAndGet() throws SQLException {
-        User user1 = new User("baby1", "아사", "monster1");
-
-        dao.add(user1);
+        dao.add(user);
         assertThat(dao.getCount()).isEqualTo(1);
 
-        User userGet1 = dao.get(user1.getId());
-        assertThat(userGet1.getName()).isEqualTo(user1.getName());
-        assertThat(userGet1.getPassword()).isEqualTo(user1.getPassword());
+        User userGet1 = dao.get(user.getId());
+        assertThat(userGet1.getName()).isEqualTo(user.getName());
+        assertThat(userGet1.getPassword()).isEqualTo(user.getPassword());
     }
 
     @Test
