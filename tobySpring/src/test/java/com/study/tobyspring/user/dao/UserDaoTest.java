@@ -17,7 +17,8 @@ public class UserDaoTest {
 
     @BeforeEach
     void setUp() throws SQLException {
-        dao.resetTable();
+        dao.deleteAll();
+        assertThat(dao.getCount()).isEqualTo(0);
     }
 
     @Test
@@ -28,6 +29,7 @@ public class UserDaoTest {
         user.setPassword("married");
 
         dao.add(user);
+        assertThat(dao.getCount()).isEqualTo(1);
 
         User user1 = dao.get(user.getId());
         assertThat(user1.getId()).isEqualTo(user.getId());

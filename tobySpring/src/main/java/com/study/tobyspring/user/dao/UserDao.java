@@ -49,15 +49,29 @@ public class UserDao {
         return user;
     }
 
-    public void resetTable() throws SQLException {
+    public void deleteAll() throws SQLException {
         Connection c = dataSource.getConnection();
-        Statement stmt = c.createStatement();
 
-        stmt.execute("SET FOREIGN_KEY_CHECKS = 0");
-        stmt.execute("TRUNCATE TABLE users");
-        stmt.execute("SET FOREIGN_KEY_CHECKS = 1");
+        PreparedStatement ps = c.prepareStatement("delete from users");
+        ps.executeUpdate();
 
-        stmt.close();
+        ps.close();
         c.close();
+    }
+
+    public int getCount() throws SQLException {
+        Connection c = dataSource.getConnection();
+
+        PreparedStatement ps = c.prepareStatement("select count(*) from users");
+
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        int count = rs.getInt(1);
+
+        rs.close();
+        ps.close();
+        c.close();
+
+        return count;
     }
 }
