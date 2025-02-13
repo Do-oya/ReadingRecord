@@ -11,15 +11,16 @@ import java.sql.SQLException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
 
 public class UserDaoTest {
 
-    ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
-    UserDao dao = context.getBean("userDao", UserDao.class);
+    private UserDao dao;
 
     @BeforeEach
     void setUp() throws SQLException {
+        ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
+        this.dao = context.getBean("userDao", UserDao.class);
+
         dao.deleteAll();
         assertThat(dao.getCount()).isEqualTo(0);
     }
@@ -37,8 +38,7 @@ public class UserDaoTest {
     }
 
     @Test
-    void getUserFailure() throws SQLException {
+    void getUserFailure() {
         assertThrows(EmptyResultDataAccessException.class, () -> dao.get("unknown_id"));
     }
-
 }
