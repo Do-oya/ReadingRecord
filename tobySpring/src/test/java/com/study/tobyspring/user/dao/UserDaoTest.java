@@ -21,7 +21,7 @@ public class UserDaoTest {
     }
 
     @Test
-    void test() throws SQLException {
+    void addAndGet() throws SQLException {
         User user = new User();
         user.setId("whiteship");
         user.setName("백기선");
@@ -30,8 +30,8 @@ public class UserDaoTest {
         dao.add(user);
 
         User user1 = dao.get(user.getId());
-        assertThat(user1.getId()).isEqualTo("whiteship");
-        assertThat(user1.getName()).isEqualTo("백기선");
-        assertThat(user1.getPassword()).isEqualTo("married");
+        assertThat(user1.getId()).isEqualTo(user.getId());
+        assertThat(user1.getName()).isEqualTo(user.getName());
+        assertThat(user1.getPassword()).isEqualTo(user.getPassword());
     }
 }
