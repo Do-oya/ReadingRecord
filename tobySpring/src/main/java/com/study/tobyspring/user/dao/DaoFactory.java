@@ -1,5 +1,6 @@
 package com.study.tobyspring.user.dao;
 
+import com.study.tobyspring.user.domain.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,7 +9,9 @@ public class DaoFactory {
 
     @Bean
     public UserDao userDao() {
-        return new UserDao(connectionMaker());
+        UserDao userDao = new UserDao();
+        userDao.setConnectionMaker(connectionMaker());
+        return userDao;
     }
 
     @Bean
