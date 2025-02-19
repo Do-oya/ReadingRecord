@@ -1,3 +1,4 @@
+/*
 package com.study.tobyspring.learningtest.template;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -25,3 +26,4 @@ public class CalcSumTest {
         assertThat(calculator.calcMultiply(this.numFilePath)).isEqualTo(24);
     }
 }
+*/

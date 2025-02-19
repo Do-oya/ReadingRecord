@@ -1,3 +1,4 @@
+/*
 package com.study.tobyspring.learningtest.template;
 
 import java.io.BufferedReader;
@@ -14,11 +15,11 @@ public class Calculator {
         return lineReadTemplate(filepath, multiplyCallback, 1);
     }
 
-    public Integer lineReadTemplate(String filePath, LineCallback callback, int initVal) {
+    public <T> T lineReadTemplate(String filePath, LineCallback<T> callback, T initVal) {
         BufferedReader br;
         try {
             br = new BufferedReader(new FileReader(filePath));
-            Integer res = initVal;
+            T res = initVal;
             String line;
             while ((line = br.readLine()) != null) {
                 res = callback.doSomethingWithLine(line, res);
@@ -33,3 +34,4 @@ public class Calculator {
         return lineReadTemplate(filePath, callback, initVal);
     }
 }
+*/
