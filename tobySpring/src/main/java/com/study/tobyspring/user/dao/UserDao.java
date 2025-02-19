@@ -34,6 +34,18 @@ public class UserDao {
         jdbcContextWithStatementStrategy.jdbcContextWithStatementStrategy(st);
     }
 
+    public void deleteAll() throws SQLException {
+        class DeleteAllStatement implements StatementStrategy {
+
+            @Override
+            public PreparedStatement makePreparedStatement(Connection c) throws SQLException {
+                return c.prepareStatement("delete from users");
+            }
+        }
+        StatementStrategy st = new DeleteAllStatement();
+        jdbcContextWithStatementStrategy.jdbcContextWithStatementStrategy(st);
+    }
+
     public User get(String id) throws SQLException {
         Connection c = dataSource.getConnection();
 
@@ -57,11 +69,6 @@ public class UserDao {
         if (user == null) throw new EmptyResultDataAccessException(1);
 
         return user;
-    }
-
-    public void deleteAll() throws SQLException {
-        StatementStrategy st = new DeleteAllStatement();
-        jdbcContextWithStatementStrategy.jdbcContextWithStatementStrategy(st);
     }
 
 
