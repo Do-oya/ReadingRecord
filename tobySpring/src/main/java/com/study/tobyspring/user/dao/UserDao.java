@@ -14,11 +14,8 @@ public class UserDao {
     private final DataSource dataSource;
     private final JdbcContextWithStatementStrategy jdbcContextWithStatementStrategy;
 
-    public void add(User user) throws SQLException {
-        @RequiredArgsConstructor
+    public void add(final User user) throws SQLException {
         class AddStatement implements StatementStrategy {
-            private final User user;
-
             @Override
             public PreparedStatement makePreparedStatement(Connection c) throws SQLException {
                 PreparedStatement ps = c.prepareStatement("insert into users(id, name, password) values(?,?,?)");
@@ -30,7 +27,7 @@ public class UserDao {
                 return ps;
             }
         }
-        StatementStrategy st = new AddStatement(user);
+        StatementStrategy st = new AddStatement();
         jdbcContextWithStatementStrategy.jdbcContextWithStatementStrategy(st);
     }
 
