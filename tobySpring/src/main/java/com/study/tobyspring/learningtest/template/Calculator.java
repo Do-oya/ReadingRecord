@@ -6,47 +6,31 @@ import java.io.IOException;
 
 public class Calculator {
     public Integer calcSum(String filePath) throws IOException {
-        BufferedReaderCallback sumCallback = br -> {
-            int sum = 0;
-            String line;
-            while ((line = br.readLine()) != null) {
-                sum += Integer.parseInt(line);
-            }
-            return sum;
-        };
-        return fileReadTemplate(filePath, sumCallback);
-    }
-
-    public Integer fileReadTemplate(String filePath, BufferedReaderCallback callback) throws IOException {
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new FileReader(filePath));
-            return callback.doSomethingWithReader(br);
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw e;
-        }
-        finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    System.out.println(e.getMessage());
-                }
-            }
-        }
+        LineCallback sumCallback = (line, value) -> value + Integer.parseInt(line);
+        return lineReadTemplate(filePath, sumCallback, 0);
     }
 
     public Integer calcMultiply(String filepath) throws IOException {
-        BufferedReaderCallback multiplyCallback = br -> {
-            int multiply = 1;
+        LineCallback multiplyCallback = (line, value) -> value * Integer.parseInt(line);
+        return lineReadTemplate(filepath, multiplyCallback, 1);
+    }
+
+    public Integer lineReadTemplate(String filePath, LineCallback callback, int initVal) {
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader(filePath));
+            Integer res = initVal;
             String line;
             while ((line = br.readLine()) != null) {
-                multiply *= Integer.parseInt(line);
+                res = callback.doSomethingWithLine(line, res);
             }
-            return multiply;
-        };
-        return fileReadTemplate(filepath, multiplyCallback);
+            return res;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            System.out.println();
+        }
+        return lineReadTemplate(filePath, callback, initVal);
     }
 }
