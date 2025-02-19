@@ -6,16 +6,13 @@ import java.io.IOException;
 
 public class Calculator {
     public Integer calcSum(String filePath) throws IOException {
-        BufferedReaderCallback sumCallback = new BufferedReaderCallback() {
-            @Override
-            public Integer doSomethingWithReader(BufferedReader br) throws IOException {
-                int sum = 0;
-                String line = null;
-                while ((line = br.readLine()) != null) {
-                    sum += Integer.parseInt(line);
-                }
-                return sum;
+        BufferedReaderCallback sumCallback = br -> {
+            int sum = 0;
+            String line;
+            while ((line = br.readLine()) != null) {
+                sum += Integer.parseInt(line);
             }
+            return sum;
         };
         return fileReadTemplate(filePath, sumCallback);
     }
@@ -24,8 +21,7 @@ public class Calculator {
         BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader(filePath));
-            int ret = callback.doSomethingWithReader(br);
-            return ret;
+            return callback.doSomethingWithReader(br);
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
