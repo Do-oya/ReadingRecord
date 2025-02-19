@@ -11,7 +11,7 @@ public class DaoFactory {
 
     @Bean
     public UserDao userDao() {
-        return new UserDao(dataSource(), jdbcContextWithStatementStrategy());
+        return new UserDao(jdbcContextWithStatementStrategy());
     }
 
     @Bean
@@ -27,7 +27,7 @@ public class DaoFactory {
     }
 
     @Bean
-    public JdbcContextWithStatementStrategy jdbcContextWithStatementStrategy() {
-        return new JdbcContextWithStatementStrategy(dataSource());
+    public JdbcContext jdbcContextWithStatementStrategy() {
+        return new JdbcContext(dataSource());
     }
 }

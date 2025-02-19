@@ -1,17 +1,19 @@
 package com.study.tobyspring.user.dao;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.ResultSetExtractor;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @RequiredArgsConstructor
-public class JdbcContextWithStatementStrategy {
+public class JdbcContext {
     private final DataSource dataSource;
 
-    public void jdbcContextWithStatementStrategy(StatementStrategy stmt) throws SQLException {
+    public void workWithStatementStrategy(StatementStrategy stmt) throws SQLException {
         Connection c = null;
         PreparedStatement ps = null;
 
@@ -34,6 +36,15 @@ public class JdbcContextWithStatementStrategy {
                 } catch (SQLException e) {
                 }
             }
+        }
+    }
+
+    public <T> T executeQuery(StatementStrategy stmt, ResultSetExtractor<T> extractor) throws SQLException {
+        try (Connection c = dataSource.getConnection();
+             PreparedStatement ps = stmt.makePreparedStatement(c);
+             ResultSet rs = ps.executeQuery()) {
+
+            return extractor.extractData(rs);
         }
     }
 }
