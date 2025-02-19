@@ -3,8 +3,6 @@ package com.study.tobyspring.learningtest.template;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CalcSumTest {
@@ -18,12 +16,12 @@ public class CalcSumTest {
     }
 
     @Test
-    void sumOfNumbers() throws IOException {
+    void sumOfNumbers() {
         assertThat(calculator.calcSum(this.numFilePath)).isEqualTo(10);
     }
 
     @Test
-    void multiplyNumbers() throws IOException {
+    void multiplyNumbers() {
         assertThat(calculator.calcMultiply(this.numFilePath)).isEqualTo(24);
     }
 }
