@@ -1,22 +1,23 @@
 package com.study.tobyspring.user.dao;
 
 import com.study.tobyspring.user.domain.User;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 import javax.sql.DataSource;
 import java.sql.*;
 
+@RequiredArgsConstructor
 public class UserDao {
 
-    private DataSource dataSource;
+    private final DataSource dataSource;
+    private final JdbcContextWithStatementStrategy jdbcContextWithStatementStrategy;
 
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
 
     public void add(User user) throws SQLException {
         StatementStrategy st = new AddStatement(user);
-        jdbcContextWithStatementStrategy(st);
+        jdbcContextWithStatementStrategy.jdbcContextWithStatementStrategy(st);
     }
 
     public User get(String id) throws SQLException {
@@ -46,34 +47,9 @@ public class UserDao {
 
     public void deleteAll() throws SQLException {
         StatementStrategy st = new DeleteAllStatement();
-        jdbcContextWithStatementStrategy(st);
+        jdbcContextWithStatementStrategy.jdbcContextWithStatementStrategy(st);
     }
 
-    public void jdbcContextWithStatementStrategy(StatementStrategy stmt) throws SQLException {
-        Connection c = null;
-        PreparedStatement ps = null;
-
-        try {
-            c = dataSource.getConnection();
-            ps = stmt.makePreparedStatement(c);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw e;
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                }
-            }
-            if (c != null) {
-                try {
-                    c.close();
-                } catch (SQLException e) {
-                }
-            }
-        }
-    }
 
     public int getCount() throws SQLException {
         Connection c = null;
