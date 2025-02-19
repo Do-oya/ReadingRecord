@@ -9,8 +9,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.sql.SQLException;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -24,14 +22,14 @@ public class UserDaoTest {
     private User user;
 
     @BeforeEach
-    void setUp() throws SQLException {
+    void setUp() {
         this.user = new User("baby", "아사", "monster");
         dao.deleteAll();
         assertThat(dao.getCount()).isEqualTo(0);
     }
 
     @Test
-    void addAndGet() throws SQLException {
+    void addAndGet() {
         dao.add(user);
         assertThat(dao.getCount()).isEqualTo(1);
 
