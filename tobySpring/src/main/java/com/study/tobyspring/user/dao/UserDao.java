@@ -3,6 +3,7 @@ package com.study.tobyspring.user.dao;
 import com.study.tobyspring.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import java.sql.*;
@@ -11,6 +12,7 @@ import java.sql.*;
 public class UserDao {
 
     private final JdbcContext jdbcContext;
+    private final JdbcTemplate jdbcTemplate;
 
     public void add(final User user) throws SQLException {
         this.jdbcContext.workWithStatementStrategy(c -> {
