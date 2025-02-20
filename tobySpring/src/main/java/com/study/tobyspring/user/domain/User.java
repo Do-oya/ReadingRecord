@@ -7,6 +7,9 @@ public class User {
     String id;
     String name;
     String password;
+    Level level;
+    int login;
+    int recommend;
 
     public User(String id, String name, String password) {
         this.id = id;
