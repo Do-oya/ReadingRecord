@@ -43,4 +43,19 @@ public class UserDaoTest {
     void getUserFailure() {
         assertThrows(EmptyResultDataAccessException.class, () -> dao.get("unknown_id"));
     }
+
+    @Test
+    void update() {
+        dao.add(user);
+
+        user.setName("사나");
+        user.setPassword("twice");
+        user.setLevel(Level.GOLD);
+        user.setLogin(1000);
+        user.setRecommend(999);
+        dao.update(user);
+
+        User userUpdate = dao.get(user.getId());
+        assertThat(userUpdate.getName()).isEqualTo(user.getName());
+    }
 }
