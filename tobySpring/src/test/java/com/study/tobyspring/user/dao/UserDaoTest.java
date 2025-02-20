@@ -1,5 +1,6 @@
 package com.study.tobyspring.user.dao;
 
+import com.study.tobyspring.user.domain.Level;
 import com.study.tobyspring.user.domain.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ public class UserDaoTest {
 
     @BeforeEach
     void setUp() {
-        this.user = new User("baby", "아사", "monster");
+        this.user = new User("baby", "아사", "monster", Level.BASIC, 1, 0);
         dao.deleteAll();
         assertThat(dao.getCount()).isEqualTo(0);
     }
