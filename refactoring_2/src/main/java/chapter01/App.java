@@ -18,6 +18,7 @@ public class App {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             ClassLoader classLoader = App.class.getClassLoader();
+            Statement statement = new Statement();
 
             // plays.json 파일 로드
             InputStream playStream = classLoader.getResourceAsStream("chapter01/plays.json");
@@ -29,7 +30,7 @@ public class App {
 
             // 각 Invoice 처리
             for (Invoice invoice : invoices) {
-                String result = Statement.statement(invoice, plays);
+                String result = statement.statement(invoice, plays);
                 logger.info("\n{}", result);
             }
         } catch (IOException e) {
