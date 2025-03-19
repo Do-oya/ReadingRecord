@@ -5,6 +5,14 @@ import java.util.Locale;
 import java.util.Map;
 
 public class Statement {
+    private Invoice invoice;
+    private Map<String, Play> plays;
+
+    public Statement(Invoice invoice, Map<String, Play> plays) {
+        this.invoice = invoice;
+        this.plays = plays;
+    }
+
     public static String statement(Invoice invoice, Map<String, Play> plays) {
         double totalAmount = 0;
         int volumeCredits = 0;
@@ -13,7 +21,7 @@ public class Statement {
         NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.US);
 
         for (Invoice.Performance aPerformance : invoice.getPerformances()) {
-            Play play = plays.get(aPerformance.getPlayID());
+            Play play = playFor(plays, aPerformance);
             double thisAmount = amountFor(aPerformance, play);
 
             // 포인트 적립
@@ -33,6 +41,10 @@ public class Statement {
         result.append(String.format("적립 포인트 %d점\n", volumeCredits));
 
         return result.toString();
+    }
+
+    private static Play playFor(Map<String, Play> plays, Invoice.Performance aPerformance) {
+        return plays.get(aPerformance.getPlayID());
     }
 
     private static double amountFor(Invoice.Performance aPerformance, Play play) {
