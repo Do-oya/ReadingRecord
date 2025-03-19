@@ -21,7 +21,6 @@ public class Statement {
         NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.US);
 
         for (Invoice.Performance perf : invoice.getPerformances()) {
-            double thisAmount = amountFor(perf);
 
             // 포인트 적립
             volumeCredits += Math.max(perf.getAudience() - 30, 0);
@@ -32,8 +31,8 @@ public class Statement {
             }
 
             // 청구 내역 출력
-            result.append(String.format("%s: %s %d석\n", playFor(perf).getName(), formatter.format(thisAmount / 100), perf.getAudience()));
-            totalAmount += thisAmount;
+            result.append(String.format("%s: %s %d석\n", playFor(perf).getName(), formatter.format(amountFor(perf) / 100), perf.getAudience()));
+            totalAmount += amountFor(perf);
         }
 
         result.append(String.format("총액 %s\n", formatter.format(totalAmount / 100)));
