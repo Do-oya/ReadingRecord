@@ -21,19 +21,18 @@ public class Statement {
         NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.US);
 
         for (Invoice.Performance perf : invoice.getPerformances()) {
-            Play play = playFor(plays, perf);
-            double thisAmount = amountFor(perf, play);
+            double thisAmount = amountFor(perf, playFor(plays, perf));
 
             // 포인트 적립
             volumeCredits += Math.max(perf.getAudience() - 30, 0);
 
             // 희극 관객 5명마다 추가 포인트
-            if ("comedy".equals(play.getType())) {
+            if ("comedy".equals(playFor(plays, perf).getType())) {
                 volumeCredits += (int) Math.floor((double) perf.getAudience() / 5);
             }
 
             // 청구 내역 출력
-            result.append(String.format("%s: %s %d석\n", play.getName(), formatter.format(thisAmount / 100), perf.getAudience()));
+            result.append(String.format("%s: %s %d석\n", playFor(plays, perf).getName(), formatter.format(thisAmount / 100), perf.getAudience()));
             totalAmount += thisAmount;
         }
 
