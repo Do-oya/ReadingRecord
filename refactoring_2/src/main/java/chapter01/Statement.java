@@ -20,20 +20,20 @@ public class Statement {
 
         NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.US);
 
-        for (Invoice.Performance aPerformance : invoice.getPerformances()) {
-            Play play = playFor(plays, aPerformance);
-            double thisAmount = amountFor(aPerformance, play);
+        for (Invoice.Performance perf : invoice.getPerformances()) {
+            Play play = playFor(plays, perf);
+            double thisAmount = amountFor(perf, play);
 
             // 포인트 적립
-            volumeCredits += Math.max(aPerformance.getAudience() - 30, 0);
+            volumeCredits += Math.max(perf.getAudience() - 30, 0);
 
             // 희극 관객 5명마다 추가 포인트
             if ("comedy".equals(play.getType())) {
-                volumeCredits += (int) Math.floor((double) aPerformance.getAudience() / 5);
+                volumeCredits += (int) Math.floor((double) perf.getAudience() / 5);
             }
 
             // 청구 내역 출력
-            result.append(String.format("%s: %s %d석\n", play.getName(), formatter.format(thisAmount / 100), aPerformance.getAudience()));
+            result.append(String.format("%s: %s %d석\n", play.getName(), formatter.format(thisAmount / 100), perf.getAudience()));
             totalAmount += thisAmount;
         }
 
