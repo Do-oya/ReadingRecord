@@ -30,7 +30,7 @@ public class App {
             // 각 Invoice 처리
             for (Invoice invoice : invoices) {
                 Statement statement = new Statement(invoice, plays);
-                String result = statement.statement(invoice, plays);
+                String result = statement.statement();
                 logger.info("\n{}", result);
             }
         } catch (IOException e) {
