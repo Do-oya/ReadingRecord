@@ -39,7 +39,7 @@ public class Statement {
             // 포인트 적립
             volumeCredits += Math.max(perf.getAudience() - 30, 0);
 
-            // 희극 관객 5명마다 추가 포이늩
+            // 희극 관객 5명마다 추가 포인트
             if ("comedy".equals(play.getType())) {
                 volumeCredits += (int) Math.floor((double) perf.getAudience() / 5);
             }
